@@ -12,15 +12,15 @@ void setup () {
 void draw () {
   background (255);
 
-  Vy += Ay; //Change Velocity
-  bally += Vy; //Change Displacement
+  Vy += Ay; //Change Velocity based on Acceleration
+  bally += Vy; //Change Displacement based on Velocity
 
   ellipse (width/2, bally, sz, sz);
 
 //Bounce Ball
   if (bally + sz/2 >= height) {
     bally=height - sz/2;
-    Vy *=-1;
+    Vy *=-1; //Reverse Velocity
   }
 }
 
