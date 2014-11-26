@@ -31,11 +31,10 @@ void draw () {
 
   //Ball Movement
   ellipse (100, y, 50, 50);
-  if (keyPressed && frameCount-fc>30) {
+  if (keyPressed) {
       y=y-5;
-      fc=frameCount;
   } else {
-    y=y+5;
+   y+= 4; 
   }
 
   //Wall
