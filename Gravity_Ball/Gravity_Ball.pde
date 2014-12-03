@@ -1,20 +1,25 @@
-GravityBall[] ball1 = new GravityBall [50];
+GravityBall[] ball1 = new GravityBall [250];
+GravityBall Mouse;
 
 void setup () {
+  size (1000, 800);
   for (int i=0; i<ball1.length; i++) {
     ball1[i] = new GravityBall ();
   }
-  size (1000, 800);
-  fill (0);
+  Mouse = new GravityBall (100, 255);
 }
 
 void draw () {
+  background (0, 0, 0);
   for (int i=0; i<ball1.length; i++) {
-    background (255);
+    ball1[i].Color();
     ball1[i].display();
     ball1[i].move();
     ball1[i].bounce();
   }
+  Mouse.Color();
+  Mouse.display();
+  Mouse.mouse();
 }
 
 class GravityBall {
@@ -25,18 +30,34 @@ class GravityBall {
   float Ax; // X Acceleration
   float Ay; // Y Acceleration
   float sz; //Size
+  color c; //Color
+
+  GravityBall (float tempsz, int tempc) {
+    sz = tempsz; //Size
+    c = tempc; //Color
+  }
 
   GravityBall () {
-    bally = random (50, 100); // Y Location
+    ballx = random (sz/2, width-sz/2);
+    bally = random (sz/2, height-sz/2); // Y Location
     Vx = 0; // X Velocity
     Vy = 5; // Y Velocity
     Ax = 0; // X Acceleration
     Ay = .1; // Y Acceleration
-    sz = random (10, 50); //Size
+    sz = random (10, 75); //Size
+    c = color(random (255), random (255), random (255)); //Color
+  }
+  void mouse () {
+    ballx = mouseX;
+    bally = mouseY;
+  }
+
+  void Color () {
+    fill (c);
   }
 
   void display () {
-    ellipse (width/2, bally, sz, sz); //Create Ellipse
+    ellipse (ballx, bally, sz, sz); //Create Ellipse
   }
 
   void move () {
