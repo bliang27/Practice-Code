@@ -4,7 +4,7 @@ class Star {
 
   Star () {
     loc = new PVector (random (sz/2, width - sz/2), random (sz/2, height - sz/2)); //Location is random across the screen
-    vel = new PVector ();
+    vel = new PVector (); 
     acc = new PVector ();
     sz = 10; 
   }
@@ -21,7 +21,7 @@ class Star {
 
   void gravity (Star beta) { //Gravitate particles toward each other
     acc = PVector.sub(beta.loc, loc); //Set direction of acceleration to beta
-    acc.setMag (.00005*beta.sz); //Sets the magnitude of acceleration proportionally to the size of beta
+    acc.setMag (.00001*beta.sz); //Sets the magnitude of acceleration proportionally to the size of beta
   }
 
   void grow (Star beta) { //Increase the size of the particle
