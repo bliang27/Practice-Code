@@ -1,0 +1,51 @@
+ArrayList<Star> stardust = new ArrayList<Star>();
+PImage space;
+
+void setup() {
+  noStroke();
+  size (1500, 800);
+  imageMode (CENTER);
+  space = loadImage ("Space.png");
+}
+
+void draw () {
+  background (space);
+
+  stardust.add(new Star ()) ;
+
+
+  for (int i = 0; i < stardust.size (); i++) {
+    Star alpha = stardust.get(i);
+    alpha.display();
+
+    if (alpha.wall ()) {
+      stardust.remove(i);
+    } else {
+      alpha.move ();
+    }
+
+    for (int j = 0; j < stardust.size (); j++) {
+      Star beta = stardust.get(j);
+
+      if (i!=j) {
+        alpha.gravity (beta);
+
+        if (alpha.sz >= beta.sz && alpha.sz > 50) {
+          alpha.stay ();
+        }
+
+        if (alpha.collide (beta)) {
+
+          if (alpha.sz >= beta.sz) {
+            alpha.grow(beta);
+            stardust.remove(j);
+          } else {
+            beta.grow(alpha);
+            stardust.remove(i);
+          }
+        }
+      }
+    }
+  }
+}
+

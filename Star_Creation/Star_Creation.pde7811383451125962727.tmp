@@ -1,0 +1,48 @@
+ArrayList<Star> stardust = new ArrayList<Star>();
+
+void setup() {
+  noStroke();
+  size (1500, 800);
+}
+
+void draw () {
+  background (0);
+
+  stardust.add(new Star ()) ;
+
+
+  for (int i = 0; i < stardust.size (); i++) {
+    Star alpha = stardust.get(i);
+    alpha.display();
+
+    if (alpha.wall ()) {
+      stardust.remove(i);
+    }
+
+    for (int j = 0; j < stardust.size (); j++) {
+      Star beta = stardust.get(j);
+
+      if (i!=j) {
+        alpha.gravity (beta);
+
+        if (alpha.sz >= beta.sz && alpha.sz > 50) {
+          alpha.stay ();
+        } else {
+          alpha.move();
+        }
+
+        if (alpha.collide (beta)) {
+
+          if (alpha.sz >= beta.sz) {
+            alpha.grow(beta);
+            stardust.remove(j);
+          } else {
+            beta.grow(alpha);
+            stardust.remove(i);
+          }
+        }
+      }
+    }
+  }
+}
+
