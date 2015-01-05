@@ -4,6 +4,7 @@ int criticalmass = 50;
 
 void setup() {
   noStroke();
+  noCursor();
   size (1500, 800);
   imageMode (CENTER);
   space = loadImage ("Space.png");
@@ -12,7 +13,7 @@ void setup() {
 void draw () {
   background (space); //Set Background as Space
 
-  stardust.add(new Star ()); //Continually Adds new stardust particles
+    stardust.add(new Star ()); //Continually Adds new stardust particles
 
   for (int i = 0; i < stardust.size (); i++) { 
     Star alpha = stardust.get(i); 
@@ -29,12 +30,12 @@ void draw () {
         alpha.gravity (beta);
 
         if (alpha.sz > criticalmass) { //If a stardust particle reaches a critical mass, make it still
-        alpha.stay();
+          alpha.stay();
         } else { //If not, make the stardust particles move
-      alpha.move ();
-    }
+          alpha.move ();
+        }
 
-        if (alpha.collide (beta)) { // If the particles collide, cause the larger particle to increase and remove the smaller particle
+        if (alpha.collide (beta)) { // If the particles collide, cause the larger particle to increase in size and remove the smaller particle
 
           if (alpha.sz > beta.sz) {  //If the particles collide and alpha is larger than beta, increase the size of alpha and remove beta
             alpha.grow(beta);
